@@ -21,7 +21,7 @@ export default function SignIn() {
     <>
       <section className="loginpage h-screen flex items-center justify-center">
         <div className="bg-white w-3/5 md:w-4/5 p-4 rounded bg-opacity-90">
-          <h3 className="ml-4 font-bold text-2xl text-custom-blue">FLAMBO</h3>
+          <h3 className="ml-4 font-bold text-2xl text-custom-blue">Library Locale</h3>
           <div className="grid grid-cols-2 gap-4">
             <div className="p-4">
               <h4 className="font-bold text-4xl">Welcome back</h4>
@@ -33,8 +33,8 @@ export default function SignIn() {
                 </div>
 
                 <div className="mb-6">
-                  <label htmlFor="confirm_password" className="block mb-2 text-m font-medium text-gray-900">Password</label>
-                  <input type="password" id="confirm_password" name="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-m rounded-l block w-full p-2.5" placeholder="•••••••••" />
+                  <label htmlFor="password" className="block mb-2 text-m font-medium text-gray-900">Password</label>
+                  <input type="password" id="password" name="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-m rounded-l block w-full p-2.5" placeholder="Enter your password" />
                 </div>
 
                 <div className="flex items-start mb-6 place-content-between">
@@ -47,7 +47,7 @@ export default function SignIn() {
 
                 <button type="submit" className="bg-custom-blue text-white focus:ring-2 focus:outline-none focus:ring-gray-300 font-medium rounded text-m w-full mt-4 mb-4 px-5 py-2.5 text-center ">Login</button>
               </form>
-              <h4 className="text-center mt-4 mb-4 font-bold">OR</h4>
+              {/* <h4 className="text-center mt-4 mb-4 font-bold">OR</h4>
               <div className="flex justify-center">
                 <button type="submit" className="bg-custom-google-light rounded w- md:w-2/4 mb-4">
                   <div className="flex px-2 py-2 justify-center items-center">
@@ -57,8 +57,8 @@ export default function SignIn() {
                     <h4 className="ml-3">sign in with google</h4>
                   </div>
                 </button>
-              </div>
-              <h6 className="mt-2">Don't have an account yet? <span className="underline text-custom-blue">SignUp</span></h6>
+              </div> */}
+              <h6 className="mt-4">Don't have an account yet? <span className="underline text-custom-blue">SignUp</span></h6>
             </div>
             <div className="p-4 flex content-center">
               <img alt="" className="h-auto" src="./welcome.png" width={600} />
