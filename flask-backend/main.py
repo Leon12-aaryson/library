@@ -5,8 +5,8 @@ from models import Books, User
 from exts import db
 from flask_migrate import Migrate
 from flask_cors import CORS
-from werkzeug.security import generate_password_hash
-from flask_jwt_extended import JWTManager
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required
 
 app = Flask(__name__)
 app.config.from_object(DevConfig)
@@ -15,6 +15,7 @@ CORS(app)
 
 db.init_app(app)
 migrate = Migrate(app,db)
+JWTManager(app)
 
 api=Api(app,doc='/docs')
 
@@ -36,6 +37,14 @@ signup_model = api.model(
         'id':fields.Integer(),
         'first_name':fields.String(),
         'last_name':fields.String(),
+        'email':fields.String(),
+        'password':fields.String()
+    }
+)
+
+signin_model = api.model(
+    "SignIn",
+    {
         'email':fields.String(),
         'password':fields.String()
     }
@@ -86,8 +95,24 @@ class SignUp(Resource):
     
 @api.route('/login')
 class SignIn(Resource):
+    
+    @api.expect(signin_model)
     def post(self):
-        pass
+        data=request.get_json()
+        
+        email=data.get('email')
+        password=data.get('password')
+        
+        db_user=User.query.filter_by(email=email).first()
+        
+        if db_user and check_password_hash(db_user.password, password):
+            access_token=create_access_token(identity=db_user.email)
+            refresh_token=create_refresh_token(identity=db_user.email)
+            
+            return jsonify({
+                "access_token":access_token,
+                "refresh_token": refresh_token
+                })
 
 
 @api.route('/books', methods=['POST','GET'])
@@ -101,6 +126,7 @@ class BooksResource(Resource):
     
     @api.marshal_with(books_model)
     @api.expect(books_model)
+    @jwt_required()
     def post(self):
         """Create books"""
         data=request.get_json()
@@ -127,6 +153,7 @@ class BookResource(Resource):
         
         
     @api.marshal_with(books_model)
+    @jwt_required()
     def put(self, id):
         """Update books by id"""
         book_to_update=Books.query.get_or_404(id)
@@ -138,6 +165,7 @@ class BookResource(Resource):
     
 
     @api.marshal_with(books_model)
+    @jwt_required()
     def delete(self, id):
         """Delete books by id"""
         book_to_delete=Books.query.get_or_404(id)
