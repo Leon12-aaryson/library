@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import SignUp from "./components/signup";
 import SignIn from "./components/signin"
 import HomePage from "./components/home"
+import 'boxicons/css/boxicons.min.css';
 
 function App() {
   return (
