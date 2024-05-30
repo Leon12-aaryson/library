@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import NavBar from "./navbar";
 import Footer from "./footer";
 export default function Homepage() {
@@ -8,18 +8,18 @@ export default function Homepage() {
     <>
       <div className="home">
         <NavBar />
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <div className="w-2/5 ml-3">
             <h2 className="text-white text-5xl content-center">Welcome to Library Locale</h2>
             <h4 className="text-white">Your one stop place for all the adventure and the treasures of literature and poetry</h4>
           </div>
-        </div>
+        </div> */}
       </div>
-      <section>
+      <section className="w-3/4 main">
         <div className="grid grid-cols-3 w-full gap-10 mt-4">
           <div className="col-span-2 p-4 ml-4">
-            <h4 className="font-medium text-2xl">Our Stories</h4>
-            <div className="grid grid-cols-auto gap-3 mt-2 justify-center content-center">
+            <h4 className="font-medium text-2xl text-center">Our Stories</h4>
+            <div className="grid grid-cols-6 gap-3 mt-2 justify-center content-center">
               <div>
                 <img src="./book.png" alt="book1" />
                 <h4 className="font-bold">The rise of Obote</h4>
@@ -45,21 +45,11 @@ export default function Homepage() {
                 <h4 className="font-bold">The rise of Obote</h4>
                 <h5 className="text-gray-500">Usher Sozzi</h5>
               </div>
-              {/* <div>
-                <img src="./book1.png" alt="book1" />
+              <div>
+                <img src="./book.png" alt="book1" />
                 <h4 className="font-bold">The rise of Obote</h4>
                 <h5 className="text-gray-500">Usher Sozzi</h5>
               </div>
-              <div>
-                <img src="./book1.png" alt="book1" />
-                <h4 className="font-bold">The rise of Obote</h4>
-                <h5 className="text-gray-500">Usher Sozzi</h5>
-              </div>
-              <div>
-                <img src="./book1.png" alt="book1" />
-                <h4 className="font-bold">The rise of Obote</h4>
-                <h5 className="text-gray-500">Usher Sozzi</h5>
-              </div> */}
             </div>
           </div>
           <div className="w-3/4 p-4">
@@ -69,6 +59,25 @@ export default function Homepage() {
               <h4>Library Locale is a project that was started out of passion to
                 build systems that provide a common African child a platform to
                 read and share knowledge.</h4>
+              <hr className="mt-2 mb-2"></hr>
+              <ul className="list-inside">
+                <li className="text-custom-blue">
+                  <Link to="/books">Books</Link>
+                </li>
+                <hr className="mt-2 mb-2"></hr>
+                <li className="text-custom-blue">
+                  <Link to="/books">Articles</Link>
+                </li>
+                <hr className="mt-2 mb-2"></hr>
+                <li className="text-custom-blue">
+                  <Link to="/books">Journals</Link>
+                </li>
+                <hr className="mt-2 mb-2"></hr>
+                <li className="text-custom-blue">
+                  <Link to="/books">Poetry</Link>
+                </li>
+              </ul>
+
             </div>
           </div>
         </div>
@@ -79,7 +88,7 @@ export default function Homepage() {
               <div className="text-center">
                 <i className='bx bx-book bg-gray-700 rounded-full p-4 text-white text-2xl mb-4'></i>
                 <h5 className="font-bold text-2xl text-white text-center mb-2">Local books</h5>
-                <p>Library Locale is a project that was started out of passion to
+                <p className="text-white mb-4">Library Locale is a project that was started out of passion to
                   build systems that provide a common African child a platform to
                   read and share knowledge</p>
               </div>
@@ -88,7 +97,7 @@ export default function Homepage() {
               <div className="text-center">
                 <i className='bx bx-spreadsheet bg-gray-700 rounded-full p-4 text-white text-2xl mb-4'></i>
                 <h5 className="font-bold text-2xl text-white text-center mb-2">Articles</h5>
-                <p>Library Locale is a project that was started out of passion to
+                <p className="text-white mb-4">Library Locale is a project that was started out of passion to
                   build systems that provide a common African child a platform to
                   read and share knowledge</p>
               </div>
@@ -97,7 +106,7 @@ export default function Homepage() {
               <div className="text-center">
                 <i className='bx bx-edit-alt bg-gray-700 rounded-full p-4 text-white text-2xl mb-4'></i>
                 <h5 className="font-bold text-2xl text-white text-center mb-2">Journals</h5>
-                <p>Library Locale is a project that was started out of passion to
+                <p className="text-white mb-4">Library Locale is a project that was started out of passion to
                   build systems that provide a common African child a platform to
                   read and share knowledge</p>
               </div>
@@ -106,7 +115,7 @@ export default function Homepage() {
               <div className="text-center">
                 <i className='bx bx-microphone bg-gray-700 rounded-full p-4 text-white text-2xl mb-4'></i>
                 <h5 className="font-bold text-2xl text-white text-center mb-2">Poetry</h5>
-                <p>Library Locale is a project that was started out of passion to
+                <p className="text-white mb-4">Library Locale is a project that was started out of passion to
                   build systems that provide a common African child a platform to
                   read and share knowledge</p>
               </div>

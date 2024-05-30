@@ -8,9 +8,7 @@
   background: #71ADB5;
 }
 
-.home{
-  height: 60vh;
-  background: linear-gradient(to right, rgba(0, 0, 0, .2) 50%, rgba(0, 0, 0, .2) 50%), url("../public/homebook.png");
-  background-size: cover;
+.main{
+  position: relative;
+  margin: auto;
 }
-
