@@ -1,21 +1,36 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NavBar from "./navbar";
 import Footer from "./footer";
+import { useEffect, useState } from "react";
+
+import axios from 'axios';
+
+
 export default function Homepage() {
-  // const location = useLocation()
+  const [articles, setArticles] = useState([])
+  useEffect(() => {
+    axios.get('http://localhost:3001/articles')
+      .then(articles => setArticles(articles.data))
+      .catch(err => console.log(err))
+  }, [])
 
   return (
     <>
       <div className="home">
         <NavBar />
-        {/* <div className="flex items-center">
-          <div className="w-2/5 ml-3">
-            <h2 className="text-white text-5xl content-center">Welcome to Library Locale</h2>
-            <h4 className="text-white">Your one stop place for all the adventure and the treasures of literature and poetry</h4>
-          </div>
-        </div> */}
       </div>
       <section className="w-3/4 main">
+        <h4>Articles</h4>
+        {/* <ul>
+          {articles.map((article) => (
+            <li key={article._id}>
+              <h2>{article.title}</h2>
+              <p>{article.content}</p>
+              <p><strong>Author:</strong> {article.author}</p>
+              <p><strong>Published Date:</strong> {new Date(article.publishedDate).toLocaleDateString()}</p>
+            </li>
+          ))}
+        </ul> */}
         <div className="grid grid-cols-3 w-full gap-10 mt-4">
           <div className="col-span-2 p-4 ml-4">
             <h4 className="font-medium text-2xl text-center">Our Stories</h4>
@@ -88,9 +103,11 @@ export default function Homepage() {
               <div className="text-center">
                 <i className='bx bx-book bg-gray-700 rounded-full p-4 text-white text-2xl mb-4'></i>
                 <h5 className="font-bold text-2xl text-white text-center mb-2">Local books</h5>
-                <p className="text-white mb-4">Library Locale is a project that was started out of passion to
-                  build systems that provide a common African child a platform to
-                  read and share knowledge</p>
+                <p className="text-white mb-4">Books are gateways to knowledge, imagination, and discovery.
+                  They offer readers a chance to explore diverse worlds, ideas, and
+                  perspectives. From fiction to nonfiction, each book holds the potential
+                  to educate, inspire, and entertain. Books have the power to connect us to
+                  different times, cultures, and experiences, enriching our lives in countless ways.</p>
               </div>
             </div>
             <div>
@@ -106,18 +123,19 @@ export default function Homepage() {
               <div className="text-center">
                 <i className='bx bx-edit-alt bg-gray-700 rounded-full p-4 text-white text-2xl mb-4'></i>
                 <h5 className="font-bold text-2xl text-white text-center mb-2">Journals</h5>
-                <p className="text-white mb-4">Library Locale is a project that was started out of passion to
-                  build systems that provide a common African child a platform to
-                  read and share knowledge</p>
+                <p className="text-white mb-4">Journals are invaluable for documenting research, ideas, and personal reflections. They provide a structured platform for recording progress, thoughts, and discoveries. Through regular entries, journals help track
+                 development, inspire creativity, and facilitate deeper understanding of subjects or oneself.</p>
               </div>
             </div>
             <div>
               <div className="text-center">
                 <i className='bx bx-microphone bg-gray-700 rounded-full p-4 text-white text-2xl mb-4'></i>
                 <h5 className="font-bold text-2xl text-white text-center mb-2">Poetry</h5>
-                <p className="text-white mb-4">Library Locale is a project that was started out of passion to
-                  build systems that provide a common African child a platform to
-                  read and share knowledge</p>
+                <p className="text-white mb-4">Poetry distills emotions and truths into carefully
+                  chosen words. Through forms like sonnets and free verse, it
+                  captures human experience, transcending language and culture.
+                  Blending sound and meaning, poetry explores the world and inner
+                  thoughts, connecting hearts and minds across generations.</p>
               </div>
             </div>
           </div>

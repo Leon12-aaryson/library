@@ -10,33 +10,20 @@ export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  async function submit(e) {
-    e.preventDefault();
-
-    try {
-
-      await axios.post("http://localhost:8000/signin", {
-        email, password
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    axios.post('http://localhost:3001/signin', { email, password })
+      .then(result => {
+        console.log(result)
+        if (result.data === "Success") {
+          history("/home")
+        }
+        else {
+          alert("Password or email incorrect")
+          history("/signin")
+        }
       })
-        .then(res => {
-          if (res.data === "exist") {
-            history("/home", { state: { id: email } })
-          }
-          else if (res.data === "notexist") {
-            alert("User have not sign up")
-          }
-        })
-        .catch(e => {
-          alert("wrong details")
-          console.log(e);
-        })
-    }
-
-    catch (e) {
-      console.log(e);
-
-    }
-
+      .catch(err => console.log(err))
   }
 
 
@@ -50,8 +37,7 @@ export default function SignIn() {
             <div className="p-4">
               <h4 className="font-bold text-4xl">Welcome back</h4>
 
-
-              <form method="POST">
+              <form method="POST" onSubmit={handleSubmit}>
                 <div className="mb-6 mt-4">
                   <label htmlFor="email" className="block mb-2 text-m font-medium text-gray-900">Your email</label>
                   <input
@@ -75,16 +61,7 @@ export default function SignIn() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-
-                {/* <div className="flex items-start mb-6 place-content-between">
-                  <div className="flex items-center h-5">
-                    <input id="remember" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-1 focus:ring-blue-300" />
-                    <label htmlFor="remember" className="ms-2 text-sm font-medium text-gray-900">Remember Me</label>
-                  </div>
-                  <label htmlFor="forgot-password" className="ms-2 text-sm font-medium text-custom-blue underline">Forot password</label>
-                </div> */}
-
-                <button onClick={submit} type="submit" className="bg-custom-blue text-white focus:ring-2 focus:outline-none focus:ring-gray-300 font-medium rounded text-m w-full mt-4 mb-4 px-5 py-2.5 text-center ">Login</button>
+                <button type="submit" className="bg-custom-blue text-white focus:ring-2 focus:outline-none focus:ring-gray-300 font-medium rounded text-m w-full mt-4 mb-4 px-5 py-2.5 text-center ">Login</button>
               </form>
 
               <h6 className="mt-4">Don't have an account yet? <Link to="/signup" className="underline text-custom-blue">SignUp</Link></h6>
