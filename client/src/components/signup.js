@@ -12,32 +12,18 @@ export default function SignUp() {
   const [lastName, setLastName] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  async function submit(e) {
+  const submit = (e) => {
     e.preventDefault();
 
-    try {
-
-      await axios.post("http://localhost:8000/signup", {
-        email, password, firstName, lastName, confirmPassword
-      })
-        .then(res => {
-          if (res.data === "exist") {
-            alert("User already exists")
-          }
-          else if (res.data === "notexist") {
-            history("/home", { state: { id: firstName } })
-          }
-        })
-        .catch(e => {
-          alert("wrong details")
-          console.log(e);
-        })
-
-    }
-    catch (e) {
-      console.log(e);
-
-    }
+    axios.post("http://localhost:3001/signup", {
+      email, password, firstName, lastName, confirmPassword
+    })
+      .then(result => {
+        console.log(result)
+        history("/signin")
+      }
+      )
+      .catch(err => console.log(err))
 
   }
 
@@ -68,7 +54,7 @@ export default function SignUp() {
                   <input
                     type="text"
                     id="first_name"
-                    name="first_name"
+                    name="firstName"
                     className="bg-gray-50 border focus:border focus:border-gray-200 text-gray-900 text-m rounded-l block w-full p-2.5"
                     placeholder="First Name"
                     onChange={(e) => setFirstName(e.target.value)}
@@ -80,7 +66,7 @@ export default function SignUp() {
                   <input
                     type="text"
                     id="last_name"
-                    name="last_name"
+                    name="lastName"
                     className="bg-gray-50 border focus:border focus:border-gray-200 text-gray-900 text-m rounded-l block w-full p-2.5"
                     placeholder="Last Name"
                     onChange={(e) => setLastName(e.target.value)}
@@ -115,8 +101,8 @@ export default function SignUp() {
                   <label htmlFor="confirm_password" className="block mb-2 text-m font-medium text-gray-900">Confirm Password</label>
                   <input
                     type="password"
-                    id="confirm_password"
-                    name="confirm_password"
+                    id="confirmPassword"
+                    name="confirmPassword"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-m rounded-l block w-full p-2.5"
                     placeholder="Confirm password"
                     onChange={(e) => setConfirmPassword(e.target.value)}
